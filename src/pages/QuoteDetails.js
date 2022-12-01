@@ -6,7 +6,7 @@ import Comments from "../components/comments/Comments";
 const QuoteDetail = () => {
     const params = useParams();
 
-    <Fragment>
+    return <Fragment>
         <h1>Quote Detail Page</h1>
         <p>{params.quoteId}</p>
         <Route path={`quotes/${params.quoteId}/comments`}>
