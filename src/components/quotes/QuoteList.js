@@ -13,6 +13,17 @@ const QuoteList = (props) => {
   const queryParams = new URLSearchParams(location.search);
   const isSortAscending = queryParams.get('sort') === 'asc';
 
+  const sortQuotes = (quotes, ascending) => {
+    return quotes.sort((quoteA, quoteB) => {
+      if (ascending) {
+        return quoteA.id > quoteB.id ? 1 : -1;
+      } else {
+        return quoteA.id < quoteB.id ? 1 : -1;
+      }
+    })
+  };
+
+  const sortedQuotes = sortQuotes(props.quotes, isSortAscending);
   const sortingChangeHandler = () => {
     history.push('/quotes?sort=' + (isSortAscending ? 'desc' : 'asc'));
   };
@@ -25,7 +36,7 @@ const QuoteList = (props) => {
         </button>
       </div>
       <ul className={classes.list}>
-        {props.quotes.map((quote) => (
+        {sortedQuotes.map((quote) => (
           <QuoteItem
             key={quote.id}
             id={quote.id}
